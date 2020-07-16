@@ -11,4 +11,13 @@ public class Player {
 		points = p;
 		playerId = id;
 	}
+	public void addPoint() {
+		points = points + 1;
+	}
+	public String getName() {
+		return name;
+	}
+	public int getPlayerId() {
+		return playerId;
+	}
 }
