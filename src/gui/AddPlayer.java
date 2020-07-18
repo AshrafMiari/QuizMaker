@@ -7,7 +7,7 @@ import appLogic.Player;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddPlayer extends JFrame implements ActionListener{
+public class AddPlayer implements ActionListener{
 	
 	private JFrame popup = new JFrame("Add Player");
 	private JButton playerAdd = new JButton("add");
@@ -39,6 +39,7 @@ public class AddPlayer extends JFrame implements ActionListener{
 			Player newPlayer = new Player(name, 0, settings.numOfPlayers);
 			settings.players.add(newPlayer);
 			settings.numOfPlayers++;
+			settings.updatePlayers();
 			popup.setVisible(false);
 			popup.dispose();
 			System.runFinalization();

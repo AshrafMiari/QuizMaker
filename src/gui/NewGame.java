@@ -2,8 +2,6 @@ package gui;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,13 +17,12 @@ public class NewGame implements ActionListener{
 	protected int numOfQuestions = 0;
 	
 	private JFrame frame = new JFrame("New Game");
+	private JLabel listOfPlayers = new JLabel("<html>" + "___Players Ready___" + "</html>");
+	private JLabel noOfQuestions = new JLabel("Number Of Questions: 0");
 	private JButton addPlayerBtn = new JButton("Add Player");
 	private JButton addQuestionBtn = new JButton("Add Question");
 	private JButton startGameBtn = new JButton("Start Game");
 	private JButton quitBtn = new JButton("Quit");
-
-	Scanner sc= new Scanner(System.in);
-	
 	
 	public NewGame() {
 		players = new ArrayList<Player>();
@@ -33,58 +30,19 @@ public class NewGame implements ActionListener{
 	}
 	
 	public void start() {
-		
 		initWindow();
-		
-		boolean gameStarted = false;
-		while(gameStarted == false) {
-			System.out.println("1. Add Player \n" +
-					   "2. Add Question \n" +
-					   "3. Start Game \n" + 
-					   "4. Quit");
-			int input = sc.nextInt();
-			sc.nextLine();
-			if(input == 1) {
-				addPlayer();
-			}else if(input == 2) {
-				addQuestion();
-			}else if(input == 3) {
-				System.out.println("To be implemented");
-				startGame();
-				gameStarted = true;
-			}else if(input == 4) {
-				System.exit(0);
-			}else {
-				System.out.println("Please enter a valid Command");
-			}
-		}
-		System.out.println("Thanks for playing :)");
-		sc.close();
-	}
-	
-	private void addPlayer() {
-		AddPlayer add = new AddPlayer(this);
-	}
-	
-	private void addQuestion() {
-		AddQuestion add = new AddQuestion(this);
-		System.out.print("Enter Question: ");
-		String question = sc.nextLine();
-		System.out.print("Enter Answer: ");
-		String answer = sc.nextLine();
-		Question newQuestion = new Question(question, answer, numOfQuestions);
-		questions.add(newQuestion);
-		numOfQuestions++;
-	}
-	
-	private void startGame() {
-		Game game = new Game();
 	}
 	
 	private void initWindow() {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(500, 500);
 		frame.setLayout(null);
+		frame.add(listOfPlayers);
+		listOfPlayers.setBounds(350, 0, 1000, 50);
+		listOfPlayers.repaint();
+		frame.add(noOfQuestions);
+		noOfQuestions.setBounds(0, 400, 1000, 50);
+		noOfQuestions.repaint();
 		frame.add(addPlayerBtn);
 		addPlayerBtn.setBounds(5, 10, 100, 50);
 		addPlayerBtn.addActionListener(this);
@@ -100,11 +58,36 @@ public class NewGame implements ActionListener{
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true); 
 	}
+	
+	public void updatePlayers() {
+		String output = "";
+		for(int i = 0; i < numOfPlayers; i++) {
+			output = output + players.get(i).toString();
+		}
+		int x = numOfPlayers * 15;
+		listOfPlayers.setText("<html>" + "___Players Ready___" + output + "</html>");
+		listOfPlayers.setBounds(350, 0, 1000, 50 + x);
+		listOfPlayers.paintImmediately(listOfPlayers.getVisibleRect());
+		frame.repaint();
+	}
+	
+	public void updateQuestions() {
+		noOfQuestions.setText("Number of Questions: " + numOfQuestions);
+		noOfQuestions.paintImmediately(noOfQuestions.getVisibleRect());
+		frame.repaint();
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == addPlayerBtn) {
-			addPlayer();
+			AddPlayer add = new AddPlayer(this);
+		}else if(e.getSource() == addQuestionBtn) {
+			AddQuestion add = new AddQuestion(this);
+		}else if(e.getSource() == quitBtn) {
+			System.exit(0);
+		}else if(e.getSource() == startGameBtn) {
+			frame.setVisible(false);
+			Game game = new Game();
 		}
 	}
 	

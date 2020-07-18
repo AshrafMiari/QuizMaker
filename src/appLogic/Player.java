@@ -20,4 +20,9 @@ public class Player {
 	public int getPlayerId() {
 		return playerId;
 	}
+	
+	@Override
+	public String toString() {
+		return "<br>" +name;
+	}
 }
