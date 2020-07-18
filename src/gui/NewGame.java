@@ -8,10 +8,10 @@ import appLogic.*;
 
 public class NewGame {
 	
-	private List<Player> players;
-	private List<Question> questions;
-	private int numOfPlayers = 0;
-	private int numOfQuestions = 0;
+	protected List<Player> players;
+	protected List<Question> questions;
+	protected int numOfPlayers = 0;
+	protected int numOfQuestions = 0;
 
 	Scanner sc= new Scanner(System.in);
 	
@@ -37,12 +37,15 @@ public class NewGame {
 				addQuestion();
 			}else if(input == 3) {
 				System.out.println("To be implemented");
+				startGame();
+				gameStarted = true;
 			}else if(input == 4) {
 				System.exit(0);
 			}else {
 				System.out.println("Please enter a valid Command");
 			}
 		}
+		System.out.println("Thanks for playing :)");
 		sc.close();
 	}
 	
@@ -63,6 +66,10 @@ public class NewGame {
 		Question newQuestion = new Question(question, answer, numOfQuestions);
 		questions.add(newQuestion);
 		numOfQuestions++;
+	}
+	
+	private void startGame() {
+		Game game = new Game();
 	}
 	
 }
