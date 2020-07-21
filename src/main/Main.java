@@ -1,5 +1,7 @@
 package main;
 
+import javax.swing.JFileChooser;
+
 import gui.NewGame;
 
 public class Main {

@@ -22,10 +22,10 @@ public class Question {
 	public int getqNumber() {
 		return qNumber;
 	}
-	public String getqAnswer() {
+	public String getAnswer() {
 		return qAnswer;
 	}
-	public String getqContents() {
+	public String getContents() {
 		return qContents;
 	}
 

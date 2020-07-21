@@ -23,6 +23,7 @@ public class NewGame implements ActionListener{
 	private JButton addQuestionBtn = new JButton("Add Question");
 	private JButton startGameBtn = new JButton("Start Game");
 	private JButton quitBtn = new JButton("Quit");
+	private JButton checkQuestionsBtn = new JButton("Review Questions");
 	
 	public NewGame() {
 		players = new ArrayList<Player>();
@@ -55,6 +56,9 @@ public class NewGame implements ActionListener{
 		frame.add(quitBtn);
 		quitBtn.setBounds(5, 190, 100, 50);
 		quitBtn.addActionListener(this);
+		frame.add(checkQuestionsBtn);
+		checkQuestionsBtn.setBounds(5, 310, 150, 50);
+		checkQuestionsBtn.addActionListener(this);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true); 
 	}
@@ -80,14 +84,20 @@ public class NewGame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == addPlayerBtn) {
-			AddPlayer add = new AddPlayer(this);
+			new AddPlayer(this);
 		}else if(e.getSource() == addQuestionBtn) {
-			AddQuestion add = new AddQuestion(this);
+			new AddQuestion(this);
 		}else if(e.getSource() == quitBtn) {
 			System.exit(0);
 		}else if(e.getSource() == startGameBtn) {
 			frame.setVisible(false);
-			Game game = new Game();
+			new Game();
+		}else if(e.getSource() == checkQuestionsBtn) {
+			if(numOfQuestions == 0) {
+				JOptionPane.showMessageDialog(null, "Please add questions first");
+			}else {
+				new ReviewQuestions(this);
+			}
 		}
 	}
 	
