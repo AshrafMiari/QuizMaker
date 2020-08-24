@@ -46,7 +46,7 @@ public class ReviewQuestions implements ActionListener{
 	}
 	
 	private void goToNextQuestion() {
-		if(currentQuestionNumber != settings.numOfQuestions -1) {
+		if(currentQuestionNumber != settings.numOfQuestions - 1) {
 			question.setText(settings.questions.get(currentQuestionNumber + 1).getContents());
 			answer.setText(settings.questions.get(currentQuestionNumber + 1).getAnswer());
 			currentQuestionNumber++;
